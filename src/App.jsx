@@ -472,9 +472,9 @@ export default function CoachLog() {
             applyData(cloud, cloud.teams[0]?.id);
           } else {
             // First sign-in — auto-migrate any localStorage data
-            const r = await window.storage.get(STORAGE_KEY).catch(() => null);
-            if (r?.value) {
-              const local = JSON.parse(r.value);
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+              const local = JSON.parse(raw);
               if (local.teams?.length > 0) {
                 setSyncing(true);
                 await sbSave(local.teams || [], local.players || [], local.games || []);
@@ -485,8 +485,8 @@ export default function CoachLog() {
           }
         } else {
           // Not signed in — load from localStorage (offline mode)
-          const r = await window.storage.get(STORAGE_KEY).catch(() => null);
-          if (r?.value) { const d = JSON.parse(r.value); applyData(d, null); }
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) { const d = JSON.parse(raw); applyData(d, null); }
         }
       } catch (e) { console.error("Load error:", e); }
       setAuthLoaded(true);
@@ -509,9 +509,9 @@ export default function CoachLog() {
           applyData(cloud, cloud.teams[0]?.id);
         } else {
           // Migrate localStorage on first sign-in
-          const r = await window.storage.get(STORAGE_KEY).catch(() => null);
-          if (r?.value) {
-            const local = JSON.parse(r.value);
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            const local = JSON.parse(raw);
             if (local.teams?.length > 0) {
               setSyncing(true);
               await sbSave(local.teams || [], local.players || [], local.games || []);
@@ -565,10 +565,10 @@ export default function CoachLog() {
         // Full persist — read other data from refs
         const snap = storeRef.current;
         // Persist clock stop — localStorage + Supabase
-        window.storage.set(STORAGE_KEY, JSON.stringify({
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify({
           teams: snap.teams, players: snap.players, games: snap.games,
           cg: stopped, activeTeamId: snap.activeTeamId,
-        })).catch(() => {});
+        })); } catch {}
         if (userRef.current) sbSave(snap.teams, snap.players, snap.games).catch(() => {});
       }
     }, 500);
@@ -577,7 +577,7 @@ export default function CoachLog() {
 
   const persist = (te, pl, ga, c, atid) => {
     // Always write to localStorage (instant, offline)
-    window.storage.set(STORAGE_KEY, JSON.stringify({ teams: te, players: pl, games: ga, cg: c, activeTeamId: atid })).catch(() => {});
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ teams: te, players: pl, games: ga, cg: c, activeTeamId: atid })); } catch {}
     // Fire-and-forget Supabase sync when signed in
     if (userRef.current) sbSave(te, pl, ga).catch(e => console.error("Sync error:", e));
   };
