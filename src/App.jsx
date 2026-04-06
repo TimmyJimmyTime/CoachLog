@@ -317,7 +317,7 @@ function SignInScreen() {
     });
   };
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 32, background: "radial-gradient(ellipse at 50% -10%, rgba(2,195,154,0.08) 0%, #030d0b 60%)" }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 32, background: "radial-gradient(ellipse at 60% -5%, rgba(0,168,150,0.35) 0%, rgba(5,102,141,0.20) 25%, rgba(2,128,144,0.08) 45%, #030d0b 70%)" }}>
       <div style={{ fontSize: 52, marginBottom: 12, filter: "drop-shadow(0 0 16px rgba(2,195,154,0.35))" }}>⚽</div>
       <div style={{ fontSize: 30, fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", marginBottom: 6, textShadow: "0 0 30px rgba(2,195,154,0.5)" }}>CoachLog</div>
       <div style={{ fontSize: 15, color: "#888", marginBottom: 52, textAlign: "center", lineHeight: 1.5 }}>
@@ -1162,15 +1162,15 @@ export default function CoachLog() {
   // ── DESIGN TOKENS ──
   const C = darkMode ? {
     // ── AR GLASS DARK THEME ──
-    bg: "#030d0b", surface: "rgba(255,255,255,0.05)", surfaceHigh: "rgba(255,255,255,0.08)", surfaceAlt: "rgba(255,255,255,0.04)",
-    border: "rgba(255,255,255,0.08)", borderMed: "rgba(255,255,255,0.12)", borderStrong: "rgba(255,255,255,0.22)",
-    text: "#ffffff", textSub: "#cccccc", textMuted: "rgba(255,255,255,0.4)", navBg: "rgba(3,13,11,0.80)",
-    green: "#02C39A", greenBg: "rgba(2,195,154,0.12)", greenBorder: "rgba(2,195,154,0.35)",
-    red: "#FF1744", redBg: "rgba(255,23,68,0.12)", redBorder: "rgba(255,23,68,0.35)",
+    bg: "#030d0b", surface: "rgba(2,195,154,0.07)", surfaceHigh: "rgba(2,195,154,0.12)", surfaceAlt: "rgba(2,195,154,0.04)",
+    border: "rgba(2,195,154,0.18)", borderMed: "rgba(2,195,154,0.28)", borderStrong: "rgba(2,195,154,0.45)",
+    text: "#ffffff", textSub: "#cccccc", textMuted: "rgba(255,255,255,0.4)", navBg: "rgba(3,13,11,0.85)",
+    green: "#02C39A", greenBg: "rgba(2,195,154,0.15)", greenBorder: "rgba(2,195,154,0.45)",
+    red: "#FF1744", redBg: "rgba(255,23,68,0.12)", redBorder: "rgba(255,23,68,0.40)",
     amber: "#FFD600", amberBg: "rgba(255,214,0,0.12)",
-    purple: "#D500F9", purpleBg: "rgba(213,0,249,0.12)", purpleBorder: "rgba(213,0,249,0.35)",
-    shadow: "0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04)", shadowSm: "0 2px 12px rgba(0,0,0,0.4)",
-    inputBg: "rgba(255,255,255,0.05)",
+    purple: "#D500F9", purpleBg: "rgba(213,0,249,0.12)", purpleBorder: "rgba(213,0,249,0.40)",
+    shadow: "0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(2,195,154,0.15), inset 0 1px 0 rgba(255,255,255,0.06)", shadowSm: "0 2px 12px rgba(0,0,0,0.5), 0 0 0 1px rgba(2,195,154,0.10)",
+    inputBg: "rgba(2,195,154,0.05)",
     pitch: { bg1: "#0a2e18", bg2: "#0d3a1e", line: "rgba(255,255,255,0.40)", stripe: "rgba(255,255,255,0.04)" },
   } : {
     bg: "#f0f2f8", surface: "#ffffff", surfaceHigh: "#ffffff", surfaceAlt: "#eaecf5",
@@ -1377,7 +1377,7 @@ export default function CoachLog() {
     : [];
 
   return (
-    <div style={{ background: darkMode ? `radial-gradient(ellipse at 50% -10%, rgba(2,195,154,0.07) 0%, ${C.bg} 55%)` : C.bg, minHeight: "100vh", color: C.text, fontFamily: F.h, maxWidth: 480, margin: "0 auto", paddingBottom: 40 }}>
+    <div style={{ background: darkMode ? `radial-gradient(ellipse at 60% -5%, rgba(0,168,150,0.35) 0%, rgba(5,102,141,0.20) 25%, rgba(2,128,144,0.08) 45%, ${C.bg} 70%)` : C.bg, minHeight: "100vh", color: C.text, fontFamily: F.h, maxWidth: 480, margin: "0 auto", paddingBottom: 40 }}>
       <style>{css}</style>
 
       {/* ── NAV ── */}
