@@ -236,7 +236,7 @@ const GAME_TYPES = {
   },
 };
 
-const TEAM_COLORS = ["#16a34a","#2563eb","#b45309","#7c3aed","#be185d","#0f766e","#c2410c","#4338ca"];
+const TEAM_COLORS = ["#02C39A","#05668D","#028090","#00A896","#2563eb","#b45309","#7c3aed","#be185d"];
 const SPORTS = [
   { emoji: "⚽", label: "Soccer" }, { emoji: "🏀", label: "Basketball" }, { emoji: "🏈", label: "Football" },
   { emoji: "⚾", label: "Baseball" }, { emoji: "🏒", label: "Hockey" }, { emoji: "🥍", label: "Lacrosse" },
@@ -1067,7 +1067,7 @@ export default function CoachLog() {
                     "Olivia Kim","Layla Hassan","Priya Sharma","Zoe Williams",
                     "Amara Osei","Isabel Nguyen","Fatima Al-Rashid"];
 
-    const demoTeam = { id: tid, name: "Demo FC", color: "#16a34a", sport: "⚽" };
+    const demoTeam = { id: tid, name: "Demo FC", color: "#02C39A", sport: "⚽" };
     const demoPlayers = pids.map((id, i) => ({ id, teamId: tid, name: pnames[i] }));
 
     // result param removed — result is computed from scoreUs/scoreThem by the app
@@ -1168,7 +1168,7 @@ export default function CoachLog() {
     bg: "#f0f2f8", surface: "#ffffff", surfaceHigh: "#ffffff", surfaceAlt: "#eaecf5",
     border: "rgba(0,0,0,0.07)", borderMed: "rgba(0,0,0,0.11)", borderStrong: "rgba(0,0,0,0.20)",
     text: "#0d1022", textSub: "#3a4060", textMuted: "#7a85a0", navBg: "rgba(240,242,248,0.95)",
-    green: "#16a34a", greenBg: "#dcfce7", greenBorder: "#86efac",
+    green: "#02C39A", greenBg: "#e6f9f5", greenBorder: "#7edfc9",
     red: "#dc2626", redBg: "#fee2e2", redBorder: "#fca5a5",
     amber: "#b45309", amberBg: "#fef3c7",
     purple: "#7c3aed", purpleBg: "#ede9fe", purpleBorder: "#c4b5fd",
