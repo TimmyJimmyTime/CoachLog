@@ -456,10 +456,17 @@ export default function CoachLog() {
 
   // Initial load — check auth, then load from Supabase or localStorage
   useEffect(() => {
+    // Safety net: if auth check hangs (common on mobile cold-start), unblock after 8s
+    const fallback = setTimeout(() => {
+      setAuthLoaded(true);
+      setLoaded(true);
+    }, 8000);
+
     (async () => {
       try {
-        // 1. Check for existing Supabase session
-        const { data: { session } } = await sb.auth.getSession();
+        // 1. Check for existing Supabase session (race against 7s timeout)
+        const timeoutSession = new Promise(res => setTimeout(() => res({ data: { session: null } }), 7000));
+        const { data: { session } } = await Promise.race([sb.auth.getSession(), timeoutSession]);
         if (session?.user) {
           userRef.current = session.user;
           setUser(session.user);
@@ -489,6 +496,7 @@ export default function CoachLog() {
           if (raw) { const d = JSON.parse(raw); applyData(d, null); }
         }
       } catch (e) { console.error("Load error:", e); }
+      clearTimeout(fallback);
       setAuthLoaded(true);
       setLoaded(true);
     })();
