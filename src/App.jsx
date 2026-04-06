@@ -317,9 +317,9 @@ function SignInScreen() {
     });
   };
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 32, background: "#0a0a0a" }}>
-      <div style={{ fontSize: 52, marginBottom: 12 }}>⚽</div>
-      <div style={{ fontSize: 30, fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", marginBottom: 6 }}>CoachLog</div>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: 32, background: "radial-gradient(ellipse at 50% -10%, rgba(2,195,154,0.08) 0%, #030d0b 60%)" }}>
+      <div style={{ fontSize: 52, marginBottom: 12, filter: "drop-shadow(0 0 16px rgba(2,195,154,0.35))" }}>⚽</div>
+      <div style={{ fontSize: 30, fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", marginBottom: 6, textShadow: "0 0 30px rgba(2,195,154,0.5)" }}>CoachLog</div>
       <div style={{ fontSize: 15, color: "#888", marginBottom: 52, textAlign: "center", lineHeight: 1.5 }}>
         Track player minutes.<br />Build fair teams.
       </div>
@@ -1153,16 +1153,16 @@ export default function CoachLog() {
 
   // ── DESIGN TOKENS ──
   const C = darkMode ? {
-    // ── HIGH-CONTRAST OUTDOOR BLACK THEME ──
-    bg: "#000000", surface: "#111111", surfaceHigh: "#1a1a1a", surfaceAlt: "#161616",
-    border: "rgba(255,255,255,0.14)", borderMed: "rgba(255,255,255,0.22)", borderStrong: "rgba(255,255,255,0.40)",
-    text: "#ffffff", textSub: "#cccccc", textMuted: "#888888", navBg: "rgba(0,0,0,0.97)",
-    green: "#00E676", greenBg: "rgba(0,230,118,0.12)", greenBorder: "rgba(0,230,118,0.35)",
+    // ── AR GLASS DARK THEME ──
+    bg: "#030d0b", surface: "rgba(255,255,255,0.05)", surfaceHigh: "rgba(255,255,255,0.08)", surfaceAlt: "rgba(255,255,255,0.04)",
+    border: "rgba(255,255,255,0.08)", borderMed: "rgba(255,255,255,0.12)", borderStrong: "rgba(255,255,255,0.22)",
+    text: "#ffffff", textSub: "#cccccc", textMuted: "rgba(255,255,255,0.4)", navBg: "rgba(3,13,11,0.80)",
+    green: "#02C39A", greenBg: "rgba(2,195,154,0.12)", greenBorder: "rgba(2,195,154,0.35)",
     red: "#FF1744", redBg: "rgba(255,23,68,0.12)", redBorder: "rgba(255,23,68,0.35)",
     amber: "#FFD600", amberBg: "rgba(255,214,0,0.12)",
     purple: "#D500F9", purpleBg: "rgba(213,0,249,0.12)", purpleBorder: "rgba(213,0,249,0.35)",
-    shadow: "0 2px 4px rgba(0,0,0,0.8), 0 8px 24px rgba(0,0,0,0.6)", shadowSm: "0 1px 4px rgba(0,0,0,0.7)",
-    inputBg: "#111111",
+    shadow: "0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04)", shadowSm: "0 2px 12px rgba(0,0,0,0.4)",
+    inputBg: "rgba(255,255,255,0.05)",
     pitch: { bg1: "#0a2e18", bg2: "#0d3a1e", line: "rgba(255,255,255,0.40)", stripe: "rgba(255,255,255,0.04)" },
   } : {
     bg: "#f0f2f8", surface: "#ffffff", surfaceHigh: "#ffffff", surfaceAlt: "#eaecf5",
@@ -1200,10 +1200,14 @@ export default function CoachLog() {
 
   const inp = (extra = {}) => ({
     background: C.inputBg, border: `1.5px solid ${C.borderMed}`, borderRadius: 12,
-    padding: "12px 14px", fontFamily: F.h, fontSize: 15, color: C.text, width: "100%", fontWeight: 500, ...extra,
+    padding: "12px 14px", fontFamily: F.h, fontSize: 15, color: C.text, width: "100%", fontWeight: 500,
+    ...(darkMode ? { backdropFilter: "blur(10px)", WebkitBackdropFilter: "blur(10px)" } : {}),
+    ...extra,
   });
   const card = (extra = {}) => ({
-    background: C.surface, border: `1px solid ${C.border}`, borderRadius: 18, boxShadow: C.shadow, ...extra,
+    background: C.surface, border: `1px solid ${C.border}`, borderRadius: 18, boxShadow: C.shadow,
+    ...(darkMode ? { backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)" } : {}),
+    ...extra,
   });
   const lbl = (extra = {}) => ({
     fontFamily: F.m, fontSize: 10, fontWeight: 700, color: C.textMuted,
@@ -1365,7 +1369,7 @@ export default function CoachLog() {
     : [];
 
   return (
-    <div style={{ background: C.bg, minHeight: "100vh", color: C.text, fontFamily: F.h, maxWidth: 480, margin: "0 auto", paddingBottom: 40 }}>
+    <div style={{ background: darkMode ? `radial-gradient(ellipse at 50% -10%, rgba(2,195,154,0.07) 0%, ${C.bg} 55%)` : C.bg, minHeight: "100vh", color: C.text, fontFamily: F.h, maxWidth: 480, margin: "0 auto", paddingBottom: 40 }}>
       <style>{css}</style>
 
       {/* ── NAV ── */}
@@ -1384,7 +1388,7 @@ export default function CoachLog() {
                     <span style={{ fontSize: 17, fontWeight: 700, color: C.text, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{teamSport} {activeTeam?.name}</span></>
                 : <span style={{ fontSize: 17, fontWeight: 800, color: C.text }}>📋 CoachLog</span>}
             </div>
-            {liveForTeam && <Chip color="#fff" bg="#16a34a" border="transparent" style={{ gap: 5 }}><span className="pulse" style={{ width: 6, height: 6, borderRadius: "50%", background: "#fff", display: "inline-block" }} /> Live</Chip>}
+            {liveForTeam && <Chip color="#030d0b" bg={C.green} border="transparent" style={{ gap: 5, boxShadow: `0 0 12px ${C.green}66` }}><span className="pulse" style={{ width: 6, height: 6, borderRadius: "50%", background: "#030d0b", display: "inline-block" }} /> Live</Chip>}
             <button className="tap" onClick={() => setDarkMode(m => !m)}
               style={{ background: C.surfaceAlt, border: `1px solid ${C.borderMed}`, borderRadius: 999, padding: "5px 10px", fontSize: 15, cursor: "pointer", lineHeight: 1 }}>
               {darkMode ? "☀️" : "🌙"}
